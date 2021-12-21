@@ -6,7 +6,10 @@ export default function App() {
   const [state, setState] = useState({
     newId: 100,
     taskTitle: '',
-    tasks: [],
+    tasks: [
+      { id: 1, title: '잠자기' },
+      { id: 2, title: '밥먹기' },
+    ],
   });
 
   const { newId, taskTitle, tasks } = state;
