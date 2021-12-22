@@ -37,7 +37,7 @@ describe('List', () => {
   });
 
   context('without tasks', () => {
-    it('renders not task message', () => {
+    it('renders no task message', () => {
       const tasks = [];
       const { getByText } = renderList(tasks);
 

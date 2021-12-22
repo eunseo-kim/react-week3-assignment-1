@@ -2,27 +2,43 @@ import { render, fireEvent } from '@testing-library/react';
 
 import Input from './Input';
 
-test('Input', () => {
+describe('Input', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
-  const { getByDisplayValue, getByLabelText, getByText } = render((
-    <Input
-      value="기존 할 일"
-      onChange={handleChange}
-      onClick={handleClick}
-    />
-  ));
+  function renderInput(value) {
+    return render((
+      <Input
+        value={value}
+        onChange={handleChange}
+        onClick={handleClick}
+      />
+    ));
+  }
 
-  expect(getByDisplayValue('기존 할 일')).not.toBeNull();
+  it('renders input with value', () => {
+    const value = 'new todo';
 
-  fireEvent.change(getByLabelText('할 일'), {
-    target: { value: '무언가 하기' },
+    const { getByDisplayValue } = renderInput(value);
+
+    expect(getByDisplayValue(value)).not.toBeNull();
   });
 
-  expect(handleChange).toBeCalled();
+  it('renders input to handle onChange 1 time', () => {
+    const { getByLabelText } = renderInput('new todo');
 
-  fireEvent.click(getByText('추가'));
+    fireEvent.change(getByLabelText('할 일'), {
+      target: { value: '무언가 하기' },
+    });
 
-  expect(handleClick).toBeCalled();
+    expect(handleChange).toBeCalledTimes(1);
+  });
+
+  it('renders "추가" button to handle onClick 1 time', () => {
+    const { getByText } = renderInput('new todo');
+
+    fireEvent.click(getByText('추가'));
+
+    expect(handleClick).toBeCalledTimes(1);
+  });
 });

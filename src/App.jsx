@@ -4,8 +4,8 @@ import Page from './Page';
 
 export default function App() {
   const [state, setState] = useState({
-    newId: 100,
-    taskTitle: '',
+    newId: 3,
+    taskTitle: '새로운 할 일',
     tasks: [
       { id: 1, title: '잠자기' },
       { id: 2, title: '밥먹기' },
